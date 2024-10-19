@@ -104,21 +104,16 @@ if(jokeIndex !==-1) {
 
 //8. DELETE All jokes
 app.delete("/all", (req, res) => {
-  const userKey = req.query.key; // or use headers if necessary
-
+  const userKey = req.query.key;
   if (userKey === masterKey) {
-    jokes = []; // Clear the jokes array by setting its length to 0
-    return res.sendStatus(200); // Make sure to return after sending the response
+    jokes.length = [];
+    res.sendStatus(200);
   } else {
-    return res
+    res
       .status(404)
-      .json({ error: "You are not authorised to perform this action." });
+      .json({ error: `You are not authorised to perform this action.` });
   }
 });
-
-
-
-
 
 app.listen(port, () => {
   console.log(`Successfully started server on port ${port}.`);
